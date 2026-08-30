@@ -635,6 +635,7 @@ export default function MusicPlayer() {
             const { PLAYING, PAUSED, ENDED } = window.YT.PlayerState;
             if (e.data === PLAYING) {
               setPlaying(true);
+              setAutoplayPending(false);
               trackEvent(EVENTS.MUSIC_STARTED);
               startTickRef.current();
             } else if (e.data === PAUSED) {
@@ -739,9 +740,10 @@ export default function MusicPlayer() {
     }
   };
 
-  /*   startAutoplay: MUST call playVideo() synchronously in click handler   */
+  /*   startAutoplay: MUST call playVideo() synchronously in click handler.
+       The overlay stays visible until playback truly begins (see PLAYING
+       handler) so a slow-loading player never loses the unlock gesture.   */
   const startAutoplay = () => {
-    setAutoplayPending(false);
     if (playerRef.current && ready) {
       playerRef.current.setVolume(volume);
       playerRef.current.playVideo();

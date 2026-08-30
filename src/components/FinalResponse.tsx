@@ -74,7 +74,7 @@ export default function FinalResponse() {
           }}
         >
           {sentRemotely
-            ? "Your message reached {creatorName} 💌"
+            ? "Your message reached Aditya Raikar 💌"
             : storedLocally
               ? "Your message was saved on this device for {creatorName} to read."
                   .replace("{creatorName}", P.creatorName)
