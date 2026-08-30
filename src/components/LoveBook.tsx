@@ -1,74 +1,35 @@
-import { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { animate } from "animejs";
+import { LOVE_BOOK_CONTENT, fillTokens } from "../config/loveContent";
+import { PERSONALIZATION as P } from "../config/personalization";
+import { getRecipientName } from "../utils/personalization";
+import { trackEvent, EVENTS } from "../utils/analytics";
 
-const PAGES = [
-  {
-    title: "A Letter to You",
-    emoji: "💌",
-    content: [
-      "If love had a beginning for me, it would look exactly like you.",
-      "From being two kids in the same school, sharing small moments without realising their weight, to meeting again years later when life somehow brought us back  it feels like destiny had been quietly writing our story all along.",
-      "You came back into my life when I least expected it, and suddenly ordinary days started feeling like something worth remembering.",
-      "This book is not just pages filled with words. It's a small piece of my heart, written for the girl who made love feel real.",
-    ],
-  },
-  {
-    title: "The Beginning",
-    emoji: "🌱",
-    content: [
-      "The first time I met you in Grade XX, I never imagined you would become this important to me. Back then, we were just school friends  same bus rides, small conversations.",
-      "When you changed schools in Class XX, life moved on. But fate had different plans.",
-      "Meeting you again in XXth grade felt unreal  like a story getting a second chance. Talking to you on Instagram slowly became the best part of my day.",
-      "The day I confessed my feelings was one of the most nervous moments of my life. When you said yes  it honestly felt like the world stopped for a second. In the best way possible.",
-    ],
-  },
-  {
-    title: "My Favourite Memories",
-    emoji: "🎞️",
-    content: [
-      "It's impossible to choose just one memory with you, because every moment somehow becomes special when you're in it.",
-      "From holding your hand for the first time, to sitting together on the school bus. From laughing at the most random things, to sharing my first kiss with you.",
-      "What I love most is how comfortable everything feels with you. Even the simplest moments become beautiful, simply because they're ours.",
-      "Sometimes I replay them in my head for no reason at all. Just because they make me smile.",
-    ],
-  },
-  {
-    title: "What I Love About You",
-    emoji: "🌹",
-    content: [
-      "There are so many things I love about you that words honestly don't feel enough.",
-      "I love how confident you are, and the graceful way you carry yourself. I love your smile, your eyes, your voice  and the way your presence alone can turn my worst days lighter.",
-      "But more than anything, I love your heart.",
-      "The way you care for people  so purely, so genuinely  makes you feel less like a girlfriend and more like home. I feel incredibly lucky to be someone you chose to share it with.",
-    ],
-  },
-  {
-    title: "My Promises to You",
-    emoji: "🕊️",
-    content: [
-      "I promise to stand beside you, no matter what life brings our way.",
-      "I promise to support your dreams, respect your feelings, and always make you feel valued and loved. Not just on the good days, but especially on the hard ones.",
-      "I want us to build something that feels peaceful, safe, and real.",
-      "You deserve that kind of love. And I intend to give it to you  every single day.",
-    ],
-  },
-  {
-    title: "Our Forever",
-    emoji: "✨",
-    content: [
-      "When I think about my future, the picture always somehow has you in it.",
-      "I imagine us growing together  supporting each other through every phase, every storm, every beautiful ordinary Tuesday.",
-      "I want us to be not just lovers, but best friends. The kind that still make each other laugh after years, who still choose each other on the hard days.",
-      "And one day, I want to marry the same girl who once sat with me on a school bus  and unknowingly became my favourite person in the world. You, always. 🌹",
-    ],
-  },
-];
+const recipientName = getRecipientName();
+// Personalize the book copy once, substituting name tokens.
+const PAGES = LOVE_BOOK_CONTENT.map((page) => ({
+  title: fillTokens(page.title, recipientName, P.creatorName),
+  emoji: page.emoji,
+  content: page.content.map((c) =>
+    fillTokens(c, recipientName, P.creatorName),
+  ),
+}));
 
 // Fixed book dimensions
 const BOOK_W = 320;
 const BOOK_H = 420;
 
-export default function LoveBook() {
+export interface LoveBookHandle {
+  open: () => void;
+}
+
+const LoveBook = forwardRef<LoveBookHandle>(function LoveBook(_, ref) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpening, setIsOpening] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -105,19 +66,40 @@ export default function LoveBook() {
     if (isOpening || isOpen) return;
     setIsOpening(true);
 
-    if (!coverRef.current) return;
+    trackEvent(EVENTS.LOVEBOOK_OPENED);
+    trackEvent(EVENTS.LOVEBOOK_PAGE_VIEWED, { metadata: { page: 1 } });
+
+    const finish = () => {
+      setIsOpen(true);
+      setIsOpening(false);
+    };
+
+    // Fallback: open the book immediately if the cover isn't mounted.
+    if (!coverRef.current) {
+      finish();
+      return;
+    }
 
     // Cover flips open from right to left (like opening a book)
+    let done = false;
     animate(coverRef.current, {
-      rotateY: [0, -160],
+      rotateY: [0, -180],
       duration: 900,
       ease: "outExpo",
       onComplete: () => {
-        setIsOpen(true);
-        setIsOpening(false);
+        done = true;
+        finish();
       },
     });
+
+    // Safety net: never leave the user stuck on the cover.
+    setTimeout(() => {
+      if (!done) finish();
+    }, 1200);
   };
+
+  // Allow parent components (e.g. the "Open the Notebook" button) to open us.
+  useImperativeHandle(ref, () => ({ open: openBook }));
 
   const flipPage = (direction: "next" | "prev") => {
     if (isFlipping) return;
@@ -134,7 +116,9 @@ export default function LoveBook() {
       duration: 250,
       ease: "inCubic",
       onComplete: () => {
-        setCurrentPage((p) => (direction === "next" ? p + 1 : p - 1));
+        const newPage = direction === "next" ? currentPage + 1 : currentPage - 1;
+        trackEvent(EVENTS.LOVEBOOK_PAGE_VIEWED, { metadata: { page: newPage } });
+        setCurrentPage(newPage);
 
         if (flipPageRef.current) {
           animate(flipPageRef.current, {
@@ -265,7 +249,7 @@ export default function LoveBook() {
           textAlign: "center",
         }}
       >
-        Our Journey
+        {P.bookLabel}
       </p>
 
       {/*   BOOK   */}
@@ -530,7 +514,16 @@ export default function LoveBook() {
           {!isOpen && (
             <div
               ref={coverRef}
+              role="button"
+              tabIndex={0}
+              aria-label="Open the notebook"
               onClick={openBook}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  openBook();
+                }
+              }}
               style={{
                 position: "absolute",
                 inset: 0,
@@ -538,6 +531,7 @@ export default function LoveBook() {
                 transformStyle: "preserve-3d",
                 zIndex: 2,
                 cursor: "pointer",
+                outline: "none",
               }}
             >
               <div
@@ -597,7 +591,7 @@ export default function LoveBook() {
                       padding: "0 1rem",
                     }}
                   >
-                    Our Journey
+                    {P.bookLabel}
                   </h3>
                   <p
                     style={{
@@ -610,7 +604,7 @@ export default function LoveBook() {
                       padding: "0 1.5rem",
                     }}
                   >
-                    A story written just for you
+                    A story written just for you, {recipientName}
                   </p>
                   <div
                     style={{
@@ -667,4 +661,6 @@ export default function LoveBook() {
       </div>
     </div>
   );
-}
+});
+
+export default LoveBook;

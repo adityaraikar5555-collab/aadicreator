@@ -1,13 +1,20 @@
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
+import { PERSONALIZATION as P } from "../config/personalization";
+import { getRecipientName } from "../utils/personalization";
+import { trackEvent, EVENTS } from "../utils/analytics";
 
 export default function HeroSection() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const emojiRef = useRef<HTMLSpanElement>(null);
 
-  const titleText = "For My Favourite Person";
+  const recipientName = getRecipientName();
+  const titleText = P.heroTitle.replace(/\{recipientName\}/g, recipientName);
 
   useEffect(() => {
+    // Record that the hero was viewed (once per session page load).
+    trackEvent(EVENTS.HERO_VIEWED);
+
     if (titleRef.current) {
       // Animate title letters
       const titleAnim = animate(titleRef.current.querySelectorAll("span"), {
@@ -61,14 +68,28 @@ export default function HeroSection() {
         <h1
           ref={titleRef}
           style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(1.5rem, 6vw, 4.5rem)",
-            color: "#fff5f0",
-            lineHeight: 1.1,
+            fontFamily: "'Great Vibes', 'Playfair Display', serif",
+            fontSize: "clamp(2rem, 8vw, 5.5rem)",
+            color: "#ffd98a",
+            lineHeight: 1.15,
+            letterSpacing: "0.02em",
+            fontStyle: "italic",
+            textShadow: "0 2px 18px rgba(232,55,90,0.35)",
           }}
         >
           {titleText.split("").map((ch, i) => (
-            <span key={i} style={{ display: "inline-block", opacity: 0 }}>
+            <span
+              key={i}
+              style={{
+                display: "inline-block",
+                opacity: 0,
+                background:
+                  "linear-gradient(120deg, #f5c15c 0%, #fff0c4 45%, #e8a84f 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               {ch === " " ? "\u00A0" : ch}
             </span>
           ))}
@@ -101,8 +122,7 @@ export default function HeroSection() {
           lineHeight: 1.7,
         }}
       >
-        My love for you is as infinite as the hearts floating around — and this
-        is just the beginning ♥
+        {P.heroSubtitle}
       </p>
 
       {/* Line 2 */}
@@ -116,7 +136,7 @@ export default function HeroSection() {
           opacity: 0.9,
         }}
       >
-        This page is made just for you ♥
+        {P.heroFooter.replace(/\{recipientName\}/g, recipientName)}
       </p>
     </section>
   );

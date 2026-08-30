@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { FEATURED_SONGS, PLAYLIST_SONGS } from "../data/songs";
+import { trackEvent, EVENTS } from "../utils/analytics";
 
 declare global {
   interface Window {
@@ -634,9 +635,11 @@ export default function MusicPlayer() {
             const { PLAYING, PAUSED, ENDED } = window.YT.PlayerState;
             if (e.data === PLAYING) {
               setPlaying(true);
+              trackEvent(EVENTS.MUSIC_STARTED);
               startTickRef.current();
             } else if (e.data === PAUSED) {
               setPlaying(false);
+              trackEvent(EVENTS.MUSIC_PAUSED);
               stopTickRef.current();
             } else if (e.data === ENDED) {
               if (

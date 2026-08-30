@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { animate } from "animejs";
 import { useNavigate } from "react-router-dom";
-const MESSAGES = [
+import { PERSONALIZATION as P } from "../config/personalization";
+import { getRecipientName } from "../utils/personalization";
+import { trackEvent, EVENTS } from "../utils/analytics";
+import { submitAnswer } from "../utils/backend";
+
+const FALLBACK_MESSAGES = [
   "Will you be my girlfriend? 💕",
   "Are you sure? 🥺",
   "That's not it bestie 😭",
@@ -13,6 +18,11 @@ const MESSAGES = [
   "Last warning... 👀",
   "The No button has left the chat 🤭",
 ];
+// Base question comes from config; escalation lines stay local to this UI.
+const MESSAGES = [P.relationshipQuestion, ...FALLBACK_MESSAGES.slice(1)];
+
+// Async guard so the celebration transition only runs once.
+let yesRecorded = false;
 const CONFETTI_PIECES = Array.from({ length: 30 }, (_, i) => ({
   id: i,
   left: `${Math.random() * 100}%`,
@@ -77,6 +87,9 @@ export default function Envelope() {
   const [noStarted, setNoStarted] = useState(false);
   const [noPos, setNoPos] = useState({ x: 200, y: 200 });
 
+  const recipientName = getRecipientName();
+  const letterIntro = P.letterIntro.replace(/\{recipientName\}/g, recipientName);
+
   const message = MESSAGES[Math.min(noAttempts, MESSAGES.length - 1)];
   // Floating loop
   useEffect(() => {
@@ -107,6 +120,9 @@ export default function Envelope() {
   const handleOpen = () => {
     if (isOpen) return;
     setIsOpen(true);
+
+    trackEvent(EVENTS.ENVELOPE_OPENED);
+    trackEvent(EVENTS.LETTER_VIEWED);
 
     if (hintRef.current)
       animate(hintRef.current, {
@@ -148,6 +164,9 @@ export default function Envelope() {
     const next = noAttempts + 1;
     setNoAttempts(next);
 
+    trackEvent(EVENTS.NO_CLICKED, { metadata: { clickNumber: next } });
+    submitAnswer("no", { clickNumber: next });
+
     if (next >= 9) {
       setNoGone(true);
       return;
@@ -165,6 +184,14 @@ export default function Envelope() {
   };
 
   const handleYes = () => {
+    if (!yesRecorded) {
+      yesRecorded = true;
+      trackEvent(EVENTS.YES_CLICKED, {
+        metadata: { noClicksBeforeYes: noAttempts },
+      });
+      submitAnswer("yes", { noClicksBeforeYes: noAttempts });
+      trackEvent(EVENTS.CELEBRATION_STARTED);
+    }
     setSaidYes(true);
   };
 
@@ -231,7 +258,7 @@ export default function Envelope() {
               zIndex: 1,
             }}
           >
-            She said Yes! 💕
+            {P.celebrationTitle}
           </p>
           <p
             style={{
@@ -242,7 +269,7 @@ export default function Envelope() {
               zIndex: 1,
             }}
           >
-            I knew you would, my love 🌹
+            {P.celebrationSubtitle}
           </p>
 
           {/* Countdown */}
@@ -289,9 +316,7 @@ export default function Envelope() {
             marginBottom: "1.25rem",
           }}
         >
-          "I've been meaning to
-          <br />
-          ask you something..."
+          "{letterIntro}"
         </p>
 
         {/* Dynamic message */}
@@ -453,7 +478,7 @@ export default function Envelope() {
             pointerEvents: "none",
           }}
         >
-          — a letter for you, tap to open —
+          {P.envelopeHint}
         </p>
 
         <div ref={envelopeRef} style={{ width: "280px" }}>

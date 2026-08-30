@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 // Journey starts :)
-const START_DATE = new Date("2025-05-14T00:00:00");
+const START_DATE = new Date("2022-09-15T00:00:00");
 
 function getElapsed() {
   const diff = Date.now() - START_DATE.getTime();
@@ -227,7 +227,7 @@ export default function LoveTimer() {
           opacity: 0,
         }}
       >
-        — together since May 14, 2025 —
+        — together since Sep 15, 2022 —
       </p>
 
       {/* Timer units */}
