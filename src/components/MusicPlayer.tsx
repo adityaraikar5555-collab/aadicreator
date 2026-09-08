@@ -42,11 +42,15 @@ declare global {
   }
 }
 
-/*   Queue setup                              
-   One random featured song opens. Rest splice in after opener ends.    */
-const _openerIdx = Math.floor(Math.random() * FEATURED_SONGS.length);
-const _opener = FEATURED_SONGS[_openerIdx];
-const _restFeat = FEATURED_SONGS.filter((_, i) => i !== _openerIdx);
+/*   Queue setup
+   "Radha Kaise Na Jale" always opens. Rest of featured songs splice in after opener ends. */
+const DEFAULT_SONG = {
+  id: "qNnvL0ztJhA",
+  title: "Radha Kaise Na Jale",
+  artist: "A.R. Rahman, Asha Bhosle, Udit Narayan",
+};
+const _opener = DEFAULT_SONG;
+const _restFeat = FEATURED_SONGS;
 const _initialQ = [_opener, ...PLAYLIST_SONGS];
 
 const isMobile = () => typeof window !== "undefined" && window.innerWidth < 600;
@@ -526,6 +530,7 @@ export default function MusicPlayer() {
   const indexRef = useRef(index);
   const shuffleRef = useRef(shuffle);
   const pendingPlayRef = useRef(false);
+  const seekStartRef = useRef(true);
   const goNextRef = useRef<() => void>(() => {});
   const goToRef = useRef<(i: number) => void>(() => {});
   const startTickRef = useRef<() => void>(() => {});
@@ -637,6 +642,10 @@ export default function MusicPlayer() {
               setPlaying(true);
               setAutoplayPending(false);
               trackEvent(EVENTS.MUSIC_STARTED);
+              if (seekStartRef.current) {
+                seekStartRef.current = false;
+                playerRef.current?.seekTo(30, true);
+              }
               startTickRef.current();
             } else if (e.data === PAUSED) {
               setPlaying(false);
@@ -790,6 +799,24 @@ export default function MusicPlayer() {
             gap: "1.5rem",
           }}
         >
+          {/* Creative Krishna backdrop */}
+          <img
+            src="/Lord/krishna.png"
+            alt=""
+            style={{
+              position: "fixed",
+              height: "min(70vh, 70vw)",
+              maxWidth: "90vw",
+              objectFit: "contain",
+              opacity: 0.5,
+              filter:
+                "drop-shadow(0 0 50px rgba(200,151,58,0.35)) drop-shadow(0 0 20px rgba(255,255,255,0.12))",
+              animation: "kanhaFloat 5s ease-in-out infinite",
+              userSelect: "none",
+              pointerEvents: "none",
+            }}
+          />
+
           <div
             style={{
               width: "72px",
@@ -802,13 +829,14 @@ export default function MusicPlayer() {
               boxShadow:
                 "0 0 40px rgba(232,55,90,0.55),0 8px 24px rgba(0,0,0,0.6)",
               animation: "mpOverlayPulse 2s ease-in-out infinite",
+              zIndex: 1,
             }}
           >
             <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
               <path d="M8 5v14l11-7z" />
             </svg>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", zIndex: 1, position: "relative" }}>
             <div
               style={{
                 fontFamily: "'Playfair Display',serif",

@@ -107,7 +107,7 @@ export const PERSONALIZATION: PersonalizationConfig = {
   creatorRole: "The person who made this little world for you, Sneha Kolvekar ✨",
   creatorPhoto: "/creator/aditya-raikar.jpg",
   recipientPhoto: "/recipient/sneha-kolvekar.png",
-  appPassword: "sneha@123",
+  appPassword: "555",
   enablePasswordGate: true,
 
   /**

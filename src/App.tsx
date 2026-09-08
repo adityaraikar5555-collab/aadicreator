@@ -63,6 +63,56 @@ function HomePage() {
   return (
     <>
       <HeartScene />
+
+      {/* Lord Krishna — prominent decorative background */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {/* Outer golden glow ring */}
+          <div
+            style={{
+              position: "absolute",
+              width: "min(420px, 75vw)",
+              height: "min(420px, 75vw)",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(200,151,58,0.12) 0%, rgba(200,151,58,0.04) 50%, transparent 70%)",
+              animation: "kanhaGlow 4s ease-in-out infinite",
+            }}
+          />
+          <img
+            src="/Lord/kanha.png"
+            alt=""
+            style={{
+              height: "min(380px, 68vw)",
+              maxWidth: "85vw",
+              objectFit: "contain",
+              opacity: 0.18,
+              filter:
+                "drop-shadow(0 0 40px rgba(200,151,58,0.3)) drop-shadow(0 0 80px rgba(232,55,90,0.12))",
+              animation: "kanhaFloat 6s ease-in-out infinite",
+              userSelect: "none",
+            }}
+          />
+        </div>
+      </div>
+
       <HeroSection />
       <Envelope />
       <FloatingHints />

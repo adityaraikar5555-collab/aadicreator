@@ -65,24 +65,43 @@ export default function PasswordGate({ children }: { children: ReactNode }) {
             width: "100%",
           }}
         >
-          {/* Heart seal icon */}
+          {/* Welcome image seal */}
           <div
             style={{
-              width: "84px",
-              height: "84px",
+              position: "relative",
+              width: "150px",
+              height: "150px",
               borderRadius: "50%",
+              padding: "6px",
+              background:
+                "linear-gradient(135deg, #c8973a, #f0c878, #c8973a)",
+              boxShadow:
+                "0 0 60px rgba(232,55,90,0.4), 0 0 25px rgba(200,151,58,0.3)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "2.6rem",
-              background:
-                "linear-gradient(135deg, rgba(232,55,90,0.25), rgba(200,151,58,0.18))",
-              border: "1px solid rgba(232,55,90,0.35)",
-              boxShadow:
-                "0 0 40px rgba(232,55,90,0.25), inset 0 0 25px rgba(232,55,90,0.15)",
             }}
           >
-            💝
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "50%",
+                overflow: "hidden",
+                border: "2px solid rgba(10,4,8,0.6)",
+              }}
+            >
+              <img
+                src="/Lord/welcome.png"
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+            </div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>

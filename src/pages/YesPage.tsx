@@ -82,6 +82,32 @@ export default function YesPage() {
     <div style={{ minHeight: "100vh", position: "relative" }}>
       <HeartScene />
 
+      {/* Lord Krishna background */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <img
+          src="/Lord/kanha.png"
+          alt=""
+          style={{
+            height: "85vh",
+            maxWidth: "90vw",
+            objectFit: "contain",
+            opacity: 0.07,
+            filter: "blur(1px) drop-shadow(0 0 60px rgba(200,151,58,0.15))",
+            userSelect: "none",
+          }}
+        />
+      </div>
+
       {/* Overlay */}
       <div
         style={{
