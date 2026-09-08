@@ -150,9 +150,9 @@ export const PERSONALIZATION: PersonalizationConfig = {
   backend: {
     enabled: true,
     // Paste your Supabase project URL here, e.g. "https://xyzcompany.supabase.co"
-    supabaseUrl: "https://lgcodufpyngjypkgpzrh.supabase.co",
+    supabaseUrl: "https://qylpcayhkcvuzicusgox.supabase.co",
     // Paste your Supabase anon (public) key here ("sb_publishable_..." / "eyJ...")
-    supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnY29kdWZweW5nanlwa2dwenJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwOTk0ODUsImV4cCI6MjEwMzY3NTQ4NX0.ptEHKaYvnclWVecJ7zJxEY2DOPXyJtIppTRcdPuUhEY",
+    supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5bHBjYXloa2N2dXppY3VzZ294Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NjU2NDksImV4cCI6MjEwNDQ0MTY0OX0.kfGRGS_r0eJOWQaPb7tzEWDntMNyUxWpP9DaEqwllqA",
     responsesTable: "responses",
     messagesTable: "messages",
   },
