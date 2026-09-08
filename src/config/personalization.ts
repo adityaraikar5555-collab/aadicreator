@@ -26,6 +26,15 @@ export interface PersonalizationConfig {
   creatorRole: string;
   /** Public path to the creator photo (e.g. "/creator/aditya-raikar.jpg"). */
   creatorPhoto: string | null;
+  /** Public path to the recipient's photo (e.g. "/recipient/sneha.jpg"). */
+  recipientPhoto: string | null;
+  /**
+   * Password that gates the whole experience. Only the person with this
+   * password can unlock the site. Send it privately to her.
+   */
+  appPassword: string;
+  /** Whether the password gate is enabled. Set to false to disable it. */
+  enablePasswordGate: boolean;
   /**
    * The default recipient name. This can be overridden per-link via
    * the `?to=` query parameter without touching this file.
@@ -95,8 +104,11 @@ export interface PersonalizationConfig {
 export const PERSONALIZATION: PersonalizationConfig = {
   creatorName: "Aadi",
   creatorFullName: "Aditya Raikar",
-  creatorRole: "The person who made this little world for you",
+  creatorRole: "The person who made this little world for you, Sneha Kolvekar ✨",
   creatorPhoto: "/creator/aditya-raikar.jpg",
+  recipientPhoto: "/recipient/sneha-kolvekar.png",
+  appPassword: "sneha@123",
+  enablePasswordGate: true,
 
   /**
    * Default name used only when someone opens the site WITHOUT a `?to=Name`
@@ -112,7 +124,7 @@ export const PERSONALIZATION: PersonalizationConfig = {
     "Because some people deserve their own little universe — and this one is all yours.",
   heroFooter: "Made especially for {recipientName} ♥",
 
-  envelopeHint: "— a letter for you, tap to open —",
+  envelopeHint: "— a letter for you, Sneha Kolvekar, tap to open —",
   envelopeTitle: "For You Alone",
   letterIntro:
     "There's something I've been meaning to tell you, {recipientName}...",

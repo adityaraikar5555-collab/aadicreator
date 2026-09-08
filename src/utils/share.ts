@@ -7,11 +7,11 @@ import { PERSONALIZATION } from "../config/personalization";
 import { buildShareLink } from "./personalization";
 
 export function defaultWhatsAppText(link: string): string {
-  return `Hey ❤️ I made something for you. Open this when you're ready: ${link}`;
+  return `Hey ❤️ I made something for you, Sneha Kolvekar. Open this when you're ready: ${link}`;
 }
 
 export function defaultInstagramText(link: string): string {
-  return `A little surprise for you ✨ ${link}`;
+  return `A little surprise for you, Sneha Kolvekar ✨ ${link}`;
 }
 
 /**

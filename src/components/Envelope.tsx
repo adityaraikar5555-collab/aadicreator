@@ -514,6 +514,34 @@ export default function Envelope() {
             </g>
           </svg>
         </div>
+
+        {/* Creative teaser — floating whisper under the envelope */}
+        <p
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(0.88rem, 1.7vw, 1.1rem)",
+            color: "#e8a0b5",
+            fontStyle: "italic",
+            marginTop: "1.6rem",
+            textAlign: "center",
+            maxWidth: "340px",
+            lineHeight: 1.6,
+            animation: "floatHint 3.5s ease-in-out infinite",
+            pointerEvents: "none",
+          }}
+        >
+          P.S. — Go for it... and just wait, there's a whole{" "}
+          <span
+            style={{
+              color: "#ff6b8a",
+              fontWeight: 700,
+              animation: "hintGlow 2.5s ease-in-out infinite",
+            }}
+          >
+            LoveBook
+          </span>{" "}
+          of us waiting on the other side ♥
+        </p>
       </div>
     </>
   );

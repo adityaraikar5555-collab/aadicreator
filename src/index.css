@@ -52,3 +52,25 @@ body {
 .book-content::-webkit-scrollbar-thumb:hover {
   background: rgba(124, 45, 18, 0.6);
 }
+
+@keyframes gentlePulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+@keyframes hintGlow {
+  0%, 100% { text-shadow: 0 0 8px rgba(232,55,90,0.3), 0 0 16px rgba(200,151,58,0.15); }
+  50% { text-shadow: 0 0 14px rgba(232,55,90,0.6), 0 0 28px rgba(200,151,58,0.3); }
+}
+
+@keyframes floatHint {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  15% { opacity: 0.9; }
+  85% { opacity: 0.9; }
+  100% { transform: translateY(-120px) rotate(180deg); opacity: 0; }
+}

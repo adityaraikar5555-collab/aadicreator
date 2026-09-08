@@ -5,6 +5,7 @@ import LoveTimer from "./LoveTimer";
 import LoveBook, { type LoveBookHandle } from "../components/LoveBook";
 import CreatorBadge from "../components/CreatorBadge";
 import FinalResponse from "../components/FinalResponse";
+import RecipientPhoto from "../components/RecipientPhoto";
 import { PERSONALIZATION as P } from "../config/personalization";
 import { getRecipientName } from "../utils/personalization";
 import { trackEvent, EVENTS } from "../utils/analytics";
@@ -13,6 +14,7 @@ export default function YesPage() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const emojiRef = useRef<HTMLSpanElement>(null);
+  const photoRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<LoveBookHandle>(null);
   const bookSectionRef = useRef<HTMLDivElement>(null);
 
@@ -58,10 +60,20 @@ export default function YesPage() {
           duration: 800,
           ease: "outExpo",
         });
+      let photoAnim: ReturnType<typeof animate> | undefined;
+      if (photoRef.current)
+        photoAnim = animate(photoRef.current, {
+          opacity: [0, 1],
+          scale: [0.8, 1],
+          delay: 2100,
+          duration: 900,
+          ease: "outExpo",
+        });
       return () => {
         titleAnim.pause();
         if (subtitleAnim) subtitleAnim.pause();
         if (emojiAnim) emojiAnim.pause();
+        if (photoAnim) photoAnim.pause();
       };
     }
   }, []);
@@ -175,6 +187,32 @@ export default function YesPage() {
           >
             {P.yesSubtitle}
           </p>
+
+          {P.recipientPhoto && (
+            <div
+              ref={photoRef}
+              style={{
+                marginTop: "2rem",
+                position: "relative",
+                display: "inline-block",
+                opacity: 0,
+              }}
+            >
+              <RecipientPhoto size={150} />
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: "-6px",
+                  right: "-6px",
+                  fontSize: "2rem",
+                  filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.5))",
+                  pointerEvents: "none",
+                }}
+              >
+                💝
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Love Timer */}

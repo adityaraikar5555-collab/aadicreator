@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
 import { PERSONALIZATION as P } from "../config/personalization";
+import RecipientBadge from "./RecipientBadge";
 import { getRecipientName } from "../utils/personalization";
 import { trackEvent, EVENTS } from "../utils/analytics";
 
 export default function HeroSection() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const emojiRef = useRef<HTMLSpanElement>(null);
+  const photoRef = useRef<HTMLDivElement>(null);
 
   const recipientName = getRecipientName();
   const titleText = P.heroTitle.replace(/\{recipientName\}/g, recipientName);
@@ -35,9 +37,21 @@ export default function HeroSection() {
           ease: "outExpo",
           duration: 800,
         });
+
+      // Animate photo (after title + emoji)
+      let photoAnim: ReturnType<typeof animate> | undefined;
+      if (photoRef.current)
+        photoAnim = animate(photoRef.current, {
+          opacity: [0, 1],
+          scale: [0.85, 1],
+          delay: 1700,
+          ease: "outExpo",
+          duration: 900,
+        });
       return () => {
         titleAnim.pause();
         if (emojiAnim) emojiAnim.pause();
+        if (photoAnim) photoAnim.pause();
       };
     }
   }, []);
@@ -45,7 +59,7 @@ export default function HeroSection() {
   return (
     <section
       style={{
-        minHeight: "50vh",
+        minHeight: "70vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -109,6 +123,19 @@ export default function HeroSection() {
         </span>
       </div>
 
+      {/* Her badge — directly below the title, just like the creator badge */}
+      {P.recipientPhoto && (
+        <div
+          ref={photoRef}
+          style={{
+            opacity: 0,
+            marginTop: "1.75rem",
+          }}
+        >
+          <RecipientBadge />
+        </div>
+      )}
+
       {/* Line 1 */}
       <p
         style={{
@@ -138,6 +165,31 @@ export default function HeroSection() {
       >
         {P.heroFooter.replace(/\{recipientName\}/g, recipientName)}
       </p>
+
+      {/* Creative hint — pulsing call to action */}
+      <div
+        style={{
+          marginTop: "2.2rem",
+          padding: "0.65rem 1.6rem",
+          background: "rgba(232,55,90,0.08)",
+          border: "1px solid rgba(232,55,90,0.18)",
+          borderRadius: "999px",
+          animation: "gentlePulse 3s ease-in-out infinite, hintGlow 3s ease-in-out infinite",
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(0.82rem, 1.6vw, 1.05rem)",
+            color: "#f48fb1",
+            fontStyle: "italic",
+            letterSpacing: "0.04em",
+            whiteSpace: "nowrap",
+          }}
+        >
+          ✨ Say Yes... and don't miss the LoveBook inside ✨
+        </p>
+      </div>
     </section>
   );
 }

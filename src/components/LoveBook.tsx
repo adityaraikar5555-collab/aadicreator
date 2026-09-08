@@ -581,6 +581,21 @@ const LoveBook = forwardRef<LoveBookHandle>(function LoveBook(_, ref) {
                     }}
                   />
                   <span style={{ fontSize: "2rem" }}>📖</span>
+                  {P.recipientPhoto && (
+                    <img
+                      src={P.recipientPhoto}
+                      alt={recipientName}
+                      loading="lazy"
+                      style={{
+                        width: "76px",
+                        height: "76px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        border: "2px solid rgba(200,151,58,0.7)",
+                        boxShadow: "0 6px 18px rgba(0,0,0,0.5)",
+                      }}
+                    />
+                  )}
                   <h3
                     style={{
                       fontFamily: "'Playfair Display',serif",
@@ -604,7 +619,7 @@ const LoveBook = forwardRef<LoveBookHandle>(function LoveBook(_, ref) {
                       padding: "0 1.5rem",
                     }}
                   >
-                    A story written just for you, {recipientName}
+                    A story written just for you, Sneha Kolvekar 💖
                   </p>
                   <div
                     style={{
