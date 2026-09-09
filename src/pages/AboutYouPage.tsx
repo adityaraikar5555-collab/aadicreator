@@ -319,7 +319,6 @@ export default function AboutYouPage() {
     if (hasAnything) {
       submitMessage(
         `📖 The Book of You — ${recipientName}\n\n${summary}`,
-        { type: "about_you" },
       ).then((res) => setSentRemotely(res.ok));
     }
 

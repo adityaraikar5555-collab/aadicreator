@@ -179,10 +179,7 @@ export default function StarFeedback() {
       localOk = false;
     }
 
-    submitMessage(feedbackText, {
-      type: "feedback",
-      rating,
-    }).then((res) => {
+    submitMessage(feedbackText).then((res) => {
       setSentRemotely(res.ok);
     });
 

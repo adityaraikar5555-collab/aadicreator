@@ -129,7 +129,11 @@ export async function submitMessage(
         text: safeText(text),
         recipient: safeText(getRecipientName()),
         session_id: getSessionId(),
-        ...metadata,
+        ...Object.fromEntries(
+          Object.entries(metadata).filter(([k]) =>
+            ["text", "recipient", "session_id"].includes(k),
+          ),
+        ),
       }),
     });
     if (!res.ok) {
