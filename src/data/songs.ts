@@ -1,5 +1,15 @@
 export const FEATURED_SONGS = [
   {
+    id: "gRRMSF0nB0c",
+    title: "Jugraafiya",
+    artist: "Udit Narayan & Shreya Ghoshal (Super 30)",
+  },
+  {
+    id: "WWZxDA81JFk",
+    title: "Tum Hi Ho",
+    artist: "Arijit Singh (Aashiqui 2)",
+  },
+  {
     id: "SBOwcGnwuKM",
     title: "Udi Udi",
     artist: "Aneesh, Sarkar, Henry",

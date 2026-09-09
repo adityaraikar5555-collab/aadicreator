@@ -43,14 +43,14 @@ declare global {
 }
 
 /*   Queue setup
-   "Radha Kaise Na Jale" always opens. Rest of featured songs splice in after opener ends. */
+   "Jugraafiya" always opens. Rest of featured songs splice in after opener ends. */
 const DEFAULT_SONG = {
-  id: "qNnvL0ztJhA",
-  title: "Radha Kaise Na Jale",
-  artist: "A.R. Rahman, Asha Bhosle, Udit Narayan",
+  id: "gRRMSF0nB0c",
+  title: "Jugraafiya",
+  artist: "Udit Narayan & Shreya Ghoshal (Super 30)",
 };
 const _opener = DEFAULT_SONG;
-const _restFeat = FEATURED_SONGS;
+const _restFeat = FEATURED_SONGS.filter((s) => s.id !== _opener.id);
 const _initialQ = [_opener, ...PLAYLIST_SONGS];
 
 const isMobile = () => typeof window !== "undefined" && window.innerWidth < 600;
@@ -530,7 +530,6 @@ export default function MusicPlayer() {
   const indexRef = useRef(index);
   const shuffleRef = useRef(shuffle);
   const pendingPlayRef = useRef(false);
-  const seekStartRef = useRef(true);
   const goNextRef = useRef<() => void>(() => {});
   const goToRef = useRef<(i: number) => void>(() => {});
   const startTickRef = useRef<() => void>(() => {});
@@ -642,10 +641,6 @@ export default function MusicPlayer() {
               setPlaying(true);
               setAutoplayPending(false);
               trackEvent(EVENTS.MUSIC_STARTED);
-              if (seekStartRef.current) {
-                seekStartRef.current = false;
-                playerRef.current?.seekTo(30, true);
-              }
               startTickRef.current();
             } else if (e.data === PAUSED) {
               setPlaying(false);

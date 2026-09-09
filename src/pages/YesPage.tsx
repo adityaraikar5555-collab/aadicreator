@@ -319,6 +319,19 @@ export default function YesPage() {
             {P.creatorSignature.replace(/\{recipientName\}/g, recipientName)}
           </p>
           <CreatorBadge />
+
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond',serif",
+              fontSize: "0.75rem",
+              letterSpacing: "0.06em",
+              color: "rgba(255,245,240,0.35)",
+              textAlign: "center",
+            }}
+          >
+            © {new Date().getFullYear()} {P.creatorFullName} · Made with all my
+            love 💖
+          </p>
         </div>
       </div>
     </div>
