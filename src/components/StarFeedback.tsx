@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { PERSONALIZATION as P } from "../config/personalization";
 import { getRecipientName } from "../utils/personalization";
 import { trackEvent, EVENTS } from "../utils/analytics";
@@ -118,6 +119,7 @@ export default function StarFeedback() {
   const [sentRemotely, setSentRemotely] = useState(false);
   const starRowRef = useRef<HTMLDivElement>(null);
   const sparkleIdRef = useRef(0);
+  const navigate = useNavigate();
 
   const spawnSparkles = useCallback(() => {
     const rect = starRowRef.current?.getBoundingClientRect();
@@ -236,6 +238,39 @@ export default function StarFeedback() {
               ? `Saved on this device for ${P.creatorName} to see.`
               : "Your rating was noted. Thank you for being part of this little world."}
         </p>
+
+        {P.enableAboutYouPage && (
+          <button
+            type="button"
+            onClick={() => navigate("/about-you")}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.transform =
+                "translateY(-2px)";
+              (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                "0 8px 24px rgba(232,55,90,0.45)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.transform =
+                "translateY(0)";
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
+            }}
+            style={{
+              marginTop: "1.2rem",
+              padding: "0.7rem 1.4rem",
+              borderRadius: "999px",
+              background:
+                "linear-gradient(135deg,rgba(124,45,18,0.9),rgba(92,26,26,0.9))",
+              border: "1px solid rgba(200,151,58,0.5)",
+              color: "#fff5f0",
+              fontFamily: "'Cormorant Garamond',serif",
+              fontSize: "0.95rem",
+              cursor: "pointer",
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
+            }}
+          >
+            {P.aboutYouCtaText}
+          </button>
+        )}
       </div>
     );
   }

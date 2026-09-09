@@ -43,11 +43,11 @@ declare global {
 }
 
 /*   Queue setup
-   "Jugraafiya" always opens. Rest of featured songs splice in after opener ends. */
+   "Inthandham" always opens. Rest of featured songs splice in after opener ends. */
 const DEFAULT_SONG = {
-  id: "gRRMSF0nB0c",
-  title: "Jugraafiya",
-  artist: "Udit Narayan & Shreya Ghoshal (Super 30)",
+  id: "dOKQeqGNJwY",
+  title: "Inthandham",
+  artist: "S.P. Charan (Sita Ramam)",
 };
 const _opener = DEFAULT_SONG;
 const _restFeat = FEATURED_SONGS.filter((s) => s.id !== _opener.id);

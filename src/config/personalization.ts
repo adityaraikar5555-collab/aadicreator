@@ -78,6 +78,16 @@ export interface PersonalizationConfig {
   /** Whether the star-rating feedback form is enabled. */
   enableFeedback: boolean;
 
+  /** Whether the "Book of You" questionnaire page is enabled. */
+  enableAboutYouPage: boolean;
+  /** CTA label shown under the star rating once it is submitted. */
+  aboutYouCtaText: string;
+  /** Headline copy for the questionnaire page. */
+  aboutYouTitle: string;
+  aboutYouSubtitle: string;
+  /** Small private note shown under the form. */
+  aboutYouPrivacyNote: string;
+
   /** Whether the creator-only "/creator" link generator is enabled. */
   enableCreatorPage: boolean;
 
@@ -147,6 +157,14 @@ export const PERSONALIZATION: PersonalizationConfig = {
   enableWorkflowTracking: true,
   enableFinalResponse: true,
   enableFeedback: true,
+
+  enableAboutYouPage: true,
+  aboutYouCtaText: "Continue our story → open The Book of You 🦋",
+  aboutYouTitle: "The Book of You",
+  aboutYouSubtitle:
+    "Tiny little pages I want to fill, so I always know how to make you smile.",
+  aboutYouPrivacyNote:
+    "Your answers stay on this device and reach {creatorName} only when you send them — nothing is shared anywhere else.",
 
   enableCreatorPage: true,
 

@@ -8,6 +8,7 @@ import CreatorBadge from "./components/CreatorBadge";
 import PasswordGate from "./components/PasswordGate";
 import YesPage from "./pages/YesPage";
 import CreatorPage from "./pages/CreatorPage";
+import AboutYouPage from "./pages/AboutYouPage";
 import { PERSONALIZATION as P } from "./config/personalization";
 import { trackEvent, EVENTS } from "./utils/analytics";
 // Home Page
@@ -144,6 +145,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/yes" element={<YesPage />} />
+          {P.enableAboutYouPage && (
+            <Route path="/about-you" element={<AboutYouPage />} />
+          )}
           {P.enableCreatorPage && (
             <Route path="/creator" element={<CreatorPage />} />
           )}
