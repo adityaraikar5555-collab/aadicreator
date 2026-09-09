@@ -282,35 +282,7 @@ export default function PhotoPopup({
           animation: "photoFade 0.2s ease",
         }}
       >
-        {/* Close button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-          }}
-          aria-label="Close photo"
-          style={{
-            position: "fixed",
-            top: "1rem",
-            right: "1.15rem",
-            width: "24px",
-            height: "24px",
-            borderRadius: "50%",
-            border: "1px solid rgba(200,151,58,0.4)",
-            background: "rgba(0,0,0,0.4)",
-            color: "rgba(255,245,240,0.8)",
-            fontSize: "0.8rem",
-            lineHeight: 1,
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 10000,
-          }}
-        >
-          ✕
-        </button>
+        {/* Close button removed — close by tapping the backdrop or pressing Escape */}
 
         <div
           onClick={(e) => e.stopPropagation()}

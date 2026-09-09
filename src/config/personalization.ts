@@ -75,6 +75,8 @@ export interface PersonalizationConfig {
   enableWorkflowTracking: boolean;
   /** Whether the optional "leave a message" form is enabled. */
   enableFinalResponse: boolean;
+  /** Whether the star-rating feedback form is enabled. */
+  enableFeedback: boolean;
 
   /** Whether the creator-only "/creator" link generator is enabled. */
   enableCreatorPage: boolean;
@@ -144,6 +146,7 @@ export const PERSONALIZATION: PersonalizationConfig = {
   enableCreatorBadge: true,
   enableWorkflowTracking: true,
   enableFinalResponse: true,
+  enableFeedback: true,
 
   enableCreatorPage: true,
 

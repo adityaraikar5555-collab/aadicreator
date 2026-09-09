@@ -5,6 +5,7 @@ import LoveTimer from "./LoveTimer";
 import LoveBook, { type LoveBookHandle } from "../components/LoveBook";
 import CreatorBadge from "../components/CreatorBadge";
 import FinalResponse from "../components/FinalResponse";
+import StarFeedback from "../components/StarFeedback";
 import RecipientPhoto from "../components/RecipientPhoto";
 import { PERSONALIZATION as P } from "../config/personalization";
 import { getRecipientName } from "../utils/personalization";
@@ -290,6 +291,9 @@ export default function YesPage() {
 
         {/* Final message form */}
         <FinalResponse />
+
+        {/* Star-rating feedback */}
+        <StarFeedback />
 
         {/* Creator signature + badge */}
         <div

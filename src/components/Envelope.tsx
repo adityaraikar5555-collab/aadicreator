@@ -530,7 +530,7 @@ export default function Envelope() {
             pointerEvents: "none",
           }}
         >
-          P.S. — Go for it... and just wait, there's a whole{" "}
+          And the sweetest part? Our{" "}
           <span
             style={{
               color: "#ff6b8a",
@@ -540,7 +540,7 @@ export default function Envelope() {
           >
             LoveBook
           </span>{" "}
-          of us waiting on the other side ♥
+          awaits you ♥
         </p>
       </div>
     </>

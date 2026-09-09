@@ -40,7 +40,8 @@ export type AnalyticsEventName =
   | "LOVEBOOK_PAGE_VIEWED"
   | "MUSIC_STARTED"
   | "MUSIC_PAUSED"
-  | "FINAL_RESPONSE_SUBMITTED";
+  | "FINAL_RESPONSE_SUBMITTED"
+  | "FEEDBACK_SUBMITTED";
 // Lowercase aliases are kept for callers who prefer that style.
 export const EVENTS = {
   APP_OPENED: "APP_OPENED" as const,
@@ -56,6 +57,7 @@ export const EVENTS = {
   MUSIC_STARTED: "MUSIC_STARTED" as const,
   MUSIC_PAUSED: "MUSIC_PAUSED" as const,
   FINAL_RESPONSE_SUBMITTED: "FINAL_RESPONSE_SUBMITTED" as const,
+  FEEDBACK_SUBMITTED: "FEEDBACK_SUBMITTED" as const,
 } as const;
 
 export interface TrackEvent {
