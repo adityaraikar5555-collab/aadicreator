@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
 import HeartScene from "../components/HeartScene";
+import CartoonDance3D from "../components/CartoonDance3D";
 import LoveTimer from "./LoveTimer";
 import LoveBook, { type LoveBookHandle } from "../components/LoveBook";
 import CreatorBadge from "../components/CreatorBadge";
@@ -84,6 +85,7 @@ export default function YesPage() {
     <div style={{ minHeight: "100vh", position: "relative" }}>
       <BalajiBadge />
       <HeartScene />
+      <CartoonDance3D />
 
       {/* Lord Krishna background */}
       <div

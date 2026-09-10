@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Envelope from "./components/Envelope";
 import HeartScene from "./components/HeartScene";
+import CartoonDance3D from "./components/CartoonDance3D";
 import HeroSection from "./components/HeroSection";
 import MusicPlayer from "./components/MusicPlayer";
 import BalajiBadge from "./components/BalajiBadge";
@@ -66,6 +67,7 @@ function HomePage() {
     <>
       <BalajiBadge />
       <HeartScene />
+      <CartoonDance3D />
 
       {/* Lord Krishna — prominent decorative background */}
       <div
