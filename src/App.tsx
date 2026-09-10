@@ -4,6 +4,7 @@ import Envelope from "./components/Envelope";
 import HeartScene from "./components/HeartScene";
 import HeroSection from "./components/HeroSection";
 import MusicPlayer from "./components/MusicPlayer";
+import BalajiBadge from "./components/BalajiBadge";
 import CreatorBadge from "./components/CreatorBadge";
 import PasswordGate from "./components/PasswordGate";
 import YesPage from "./pages/YesPage";
@@ -63,6 +64,7 @@ function FloatingHints() {
 function HomePage() {
   return (
     <>
+      <BalajiBadge />
       <HeartScene />
 
       {/* Lord Krishna — prominent decorative background */}

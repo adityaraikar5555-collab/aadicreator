@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PERSONALIZATION as P } from "../config/personalization";
 import ShareButton from "../components/ShareButton";
 import CreatorBadge from "../components/CreatorBadge";
+import BalajiBadge from "../components/BalajiBadge";
 import JourneyTimeline from "../components/JourneyTimeline";
 import ResponsesPanel from "../components/ResponsesPanel";
 import HeartScene from "../components/HeartScene";
@@ -16,6 +17,7 @@ export default function CreatorPage() {
 
   return (
     <div style={{ minHeight: "100vh", position: "relative", padding: "3rem 1.5rem 6rem" }}>
+      <BalajiBadge />
       <HeartScene />
       <div
         style={{

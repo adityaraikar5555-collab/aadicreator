@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HeartScene from "../components/HeartScene";
 import CreatorBadge from "../components/CreatorBadge";
+import BalajiBadge from "../components/BalajiBadge";
 import { PERSONALIZATION as P } from "../config/personalization";
 import { getRecipientName } from "../utils/personalization";
 import { trackEvent, EVENTS } from "../utils/analytics";
@@ -333,6 +334,7 @@ export default function AboutYouPage() {
   if (submitted) {
     return (
       <div style={{ minHeight: "100vh", position: "relative" }}>
+        <BalajiBadge />
         <HeartScene />
         <div
           style={{
@@ -423,6 +425,7 @@ export default function AboutYouPage() {
 
   return (
     <div style={{ minHeight: "100vh", position: "relative" }}>
+      <BalajiBadge />
       <HeartScene />
 
       {/* Lord Krishna background */}

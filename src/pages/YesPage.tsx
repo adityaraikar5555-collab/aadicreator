@@ -4,6 +4,7 @@ import HeartScene from "../components/HeartScene";
 import LoveTimer from "./LoveTimer";
 import LoveBook, { type LoveBookHandle } from "../components/LoveBook";
 import CreatorBadge from "../components/CreatorBadge";
+import BalajiBadge from "../components/BalajiBadge";
 import FinalResponse from "../components/FinalResponse";
 import StarFeedback from "../components/StarFeedback";
 import RecipientPhoto from "../components/RecipientPhoto";
@@ -81,6 +82,7 @@ export default function YesPage() {
 
   return (
     <div style={{ minHeight: "100vh", position: "relative" }}>
+      <BalajiBadge />
       <HeartScene />
 
       {/* Lord Krishna background */}
