@@ -85,7 +85,6 @@ export default function YesPage() {
     <div style={{ minHeight: "100vh", position: "relative" }}>
       <BalajiBadge />
       <HeartScene />
-      <CartoonDance3D />
 
       {/* Lord Krishna background */}
       <div
@@ -245,6 +244,9 @@ export default function YesPage() {
             </div>
           )}
         </div>
+
+        {/* 3D cartoon dancers */}
+        <CartoonDance3D />
 
         {/* Love Timer */}
         <LoveTimer />

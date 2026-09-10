@@ -67,7 +67,6 @@ function HomePage() {
     <>
       <BalajiBadge />
       <HeartScene />
-      <CartoonDance3D />
 
       {/* Lord Krishna — prominent decorative background */}
       <div
@@ -119,6 +118,7 @@ function HomePage() {
       </div>
 
       <HeroSection />
+      <CartoonDance3D />
       <Envelope />
       <FloatingHints />
       <div

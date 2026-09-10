@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 interface DancerDef {
@@ -27,6 +27,8 @@ interface Sparkle {
 }
 
 type DanceFn = (d: Dancer, t: number) => void;
+
+const MOBILE_BREAKPOINT = 900;
 
 const DANCES: DanceFn[] = [
   // 0 — happy bounce + somersault flip
@@ -70,19 +72,22 @@ function buildSideScene(
   mount: HTMLDivElement,
   defs: DancerDef[],
   accent: number,
+  mobile: boolean,
 ): () => void {
   let disposed = false;
   const vw = Math.max(window.innerWidth, 320);
-  const factor = THREE.MathUtils.clamp(vw / 1440, 0.55, 1);
+  const factor = mobile
+    ? 0.8
+    : THREE.MathUtils.clamp(vw / 1600, 0.6, 1);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
-    45,
-    mount.clientWidth / Math.max(mount.clientHeight, 1),
+    50,
+    Math.max(mount.clientWidth, 1) / Math.max(mount.clientHeight, 1),
     0.1,
     50,
   );
-  camera.position.set(0, 0.4, 6.5);
+  camera.position.set(0, 0.3, mobile ? 7.5 : 7);
   camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({
@@ -206,7 +211,7 @@ function buildSideScene(
     });
 
     camera.position.x = THREE.MathUtils.lerp(camera.position.x, px * 1.2, 0.04);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, 0.4 - py * 0.5, 0.04);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, 0.3 - py * 0.5, 0.04);
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);
@@ -240,38 +245,70 @@ function buildSideScene(
   };
 }
 
+const DESKTOP_LEFT = [
+  { texture: "/recipient/doreman.png", size: 2.3, x: 0, y: 1.1, style: 0 },
+  { texture: "/recipient/sinchan.png", size: 1.9, x: 0, y: -1.8, style: 1 },
+];
+
+const DESKTOP_RIGHT = [
+  { texture: "/recipient/doremon1.png", size: 2.3, x: 0, y: 1.1, style: 0 },
+  { texture: "/recipient/sinchan1.png", size: 1.9, x: 0, y: -1.8, style: 1 },
+];
+
 export default function CartoonDance3D() {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const mobileLeftRef = useRef<HTMLDivElement>(null);
+  const mobileRightRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(
+    () => window.innerWidth <= MOBILE_BREAKPOINT,
+  );
 
   useEffect(() => {
-    let cleanupLeft: (() => void) | undefined;
-    let cleanupRight: (() => void) | undefined;
-    if (leftRef.current) {
-      cleanupLeft = buildSideScene(
-        leftRef.current,
-        [
-          { texture: "/recipient/doreman.png", size: 2.5, x: 0, y: 0.4, style: 0 },
-          { texture: "/recipient/sinchan.png", size: 2.1, x: 0, y: -1.6, style: 1 },
-        ],
-        0x4dd0e1,
-      );
-    }
-    if (rightRef.current) {
-      cleanupRight = buildSideScene(
-        rightRef.current,
-        [
-          { texture: "/recipient/doremon1.png", size: 2.5, x: 0, y: 0.4, style: 0 },
-          { texture: "/recipient/sinchan1.png", size: 2.1, x: 0, y: -1.6, style: 1 },
-        ],
-        0xe8375a,
-      );
-    }
-    return () => {
-      if (cleanupLeft) cleanupLeft();
-      if (cleanupRight) cleanupRight();
-    };
+    const onResize = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  useEffect(() => {
+    let cleanupA: (() => void) | undefined;
+    let cleanupB: (() => void) | undefined;
+
+    if (isMobile) {
+      if (mobileLeftRef.current) {
+        cleanupA = buildSideScene(
+          mobileLeftRef.current,
+          [
+            { texture: "/recipient/doreman.png", size: 2.2, x: 0, y: 0, style: 0 },
+          ],
+          0x4dd0e1,
+          true,
+        );
+      }
+      if (mobileRightRef.current) {
+        cleanupB = buildSideScene(
+          mobileRightRef.current,
+          [
+            { texture: "/recipient/sinchan.png", size: 2.2, x: 0, y: 0, style: 1 },
+          ],
+          0xe8375a,
+          true,
+        );
+      }
+    } else {
+      if (leftRef.current) {
+        cleanupA = buildSideScene(leftRef.current, DESKTOP_LEFT, 0x4dd0e1, false);
+      }
+      if (rightRef.current) {
+        cleanupB = buildSideScene(rightRef.current, DESKTOP_RIGHT, 0xe8375a, false);
+      }
+    }
+
+    return () => {
+      if (cleanupA) cleanupA();
+      if (cleanupB) cleanupB();
+    };
+  }, [isMobile]);
 
   return (
     <>
@@ -280,6 +317,14 @@ export default function CartoonDance3D() {
       </div>
       <div className="cartoon-side cartoon-side--right">
         <div ref={rightRef} style={{ width: "100%", height: "100%" }} />
+      </div>
+      <div className="cartoon-dance-mobile">
+        <div>
+          <div ref={mobileLeftRef} style={{ width: "100%", height: "100%" }} />
+        </div>
+        <div>
+          <div ref={mobileRightRef} style={{ width: "100%", height: "100%" }} />
+        </div>
       </div>
     </>
   );
