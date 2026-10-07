@@ -41,7 +41,7 @@ export interface PersonalizationConfig {
   maintenanceSubtitle: string;
   /** Detailed notice / message on the temporarily stopped page. */
   maintenanceNotice: string;
-  /** Extra punchline / callout text. */
+  /** Extra punchline / callout text (optional). */
   maintenancePunchline?: string;
   /** Admin bypass key to preview the site even when stopped (optional). */
   adminBypassKey?: string;
@@ -147,8 +147,8 @@ export const PERSONALIZATION: PersonalizationConfig = {
   enableMaintenanceMode: true,
   maintenanceTitle: "Temporarily Stopped by Admin",
   maintenanceSubtitle: "This website has been temporarily stopped by the administrator.",
-  maintenanceNotice: "Access to this space has been closed.",
-  maintenancePunchline: "Bitch It's Done, Get Lost",
+  maintenanceNotice: "Access to this space has been temporarily suspended. Please contact the administrator or check back later.",
+
   adminBypassKey: "fuck u",
 
   appPassword: "fuck u",
