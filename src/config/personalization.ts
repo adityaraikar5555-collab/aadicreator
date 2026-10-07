@@ -28,6 +28,24 @@ export interface PersonalizationConfig {
   creatorPhoto: string | null;
   /** Public path to the recipient's photo (e.g. "/recipient/sneha.jpg"). */
   recipientPhoto: string | null;
+
+  /**
+   * Master switch to temporarily stop the website.
+   * When set to true, a "Temporarily Stopped by Admin" page is shown
+   * before the password or secret key gate.
+   */
+  enableMaintenanceMode: boolean;
+  /** Title shown on the temporarily stopped page. */
+  maintenanceTitle: string;
+  /** Subtitle shown on the temporarily stopped page. */
+  maintenanceSubtitle: string;
+  /** Detailed notice / message on the temporarily stopped page. */
+  maintenanceNotice: string;
+  /** Extra punchline / callout text. */
+  maintenancePunchline?: string;
+  /** Admin bypass key to preview the site even when stopped (optional). */
+  adminBypassKey?: string;
+
   /**
    * Password that gates the whole experience. Only the person with this
    * password can unlock the site. Send it privately to her.
@@ -119,6 +137,20 @@ export const PERSONALIZATION: PersonalizationConfig = {
   creatorRole: "The person who made this little world for you, Sneha Kolvekar ✨",
   creatorPhoto: "/creator/aditya-raikar.jpg",
   recipientPhoto: "/recipient/sneha-kolvekar.png",
+
+  /**
+   * STOP WEBSITE SWITCH:
+   * Set `enableMaintenanceMode: true` to pause/stop the website.
+   * Visitors will see the "Temporarily Stopped by Admin" page before any password/secret key prompt.
+   * Set to `false` when you want to reopen it.
+   */
+  enableMaintenanceMode: true,
+  maintenanceTitle: "Temporarily Stopped by Admin",
+  maintenanceSubtitle: "This website has been temporarily stopped by the administrator.",
+  maintenanceNotice: "Access to this space has been closed.",
+  maintenancePunchline: "Bitch It's Done, Get Lost",
+  adminBypassKey: "Raikar@123",
+
   appPassword: "Raikar@123",
   enablePasswordGate: true,
 

@@ -8,6 +8,7 @@ import MusicPlayer from "./components/MusicPlayer";
 import BalajiBadge from "./components/BalajiBadge";
 import CreatorBadge from "./components/CreatorBadge";
 import PasswordGate from "./components/PasswordGate";
+import MaintenanceGate from "./components/MaintenanceGate";
 import YesPage from "./pages/YesPage";
 import CreatorPage from "./pages/CreatorPage";
 import AboutYouPage from "./pages/AboutYouPage";
@@ -15,7 +16,7 @@ import { PERSONALIZATION as P } from "./config/personalization";
 import { trackEvent, EVENTS } from "./utils/analytics";
 // Home Page
 const FLOATING_HINTS = [
-  { text: "Don't miss the LoveBook 💝", left: "6%", delay: "0s", duration: "9s" },
+  { text: "Don't miss the LoveBook 💌", left: "6%", delay: "0s", duration: "9s" },
   { text: "Say Yes ♥", left: "26%", delay: "2.5s", duration: "11s" },
   { text: "Go for it ✨", left: "58%", delay: "1.2s", duration: "10s" },
   { text: "Psst... the book awaits 📖", left: "74%", delay: "4s", duration: "12s" },
@@ -143,20 +144,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <PasswordGate>
-        {/* Music Player outside routes - stays on all pages*/}
-        <MusicPlayer />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/yes" element={<YesPage />} />
-          {P.enableAboutYouPage && (
-            <Route path="/about-you" element={<AboutYouPage />} />
-          )}
-          {P.enableCreatorPage && (
-            <Route path="/creator" element={<CreatorPage />} />
-          )}
-        </Routes>
-      </PasswordGate>
+      <MaintenanceGate>
+        <PasswordGate>
+          {/* Music Player outside routes - stays on all pages*/}
+          <MusicPlayer />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/yes" element={<YesPage />} />
+            {P.enableAboutYouPage && (
+              <Route path="/about-you" element={<AboutYouPage />} />
+            )}
+            {P.enableCreatorPage && (
+              <Route path="/creator" element={<CreatorPage />} />
+            )}
+          </Routes>
+        </PasswordGate>
+      </MaintenanceGate>
     </BrowserRouter>
   );
 }
