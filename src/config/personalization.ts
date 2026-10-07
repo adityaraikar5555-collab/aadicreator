@@ -149,9 +149,9 @@ export const PERSONALIZATION: PersonalizationConfig = {
   maintenanceSubtitle: "This website has been temporarily stopped by the administrator.",
   maintenanceNotice: "Access to this space has been closed.",
   maintenancePunchline: "Bitch It's Done, Get Lost",
-  adminBypassKey: "Raikar@123",
+  adminBypassKey: "fuck u",
 
-  appPassword: "Raikar@123",
+  appPassword: "fuck u",
   enablePasswordGate: true,
 
   /**
