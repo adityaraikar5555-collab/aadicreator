@@ -8,7 +8,6 @@ import MusicPlayer from "./components/MusicPlayer";
 import BalajiBadge from "./components/BalajiBadge";
 import CreatorBadge from "./components/CreatorBadge";
 import PasswordGate from "./components/PasswordGate";
-import MaintenanceGate from "./components/MaintenanceGate";
 import YesPage from "./pages/YesPage";
 import CreatorPage from "./pages/CreatorPage";
 import AboutYouPage from "./pages/AboutYouPage";
@@ -144,22 +143,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <MaintenanceGate>
-        <PasswordGate>
-          {/* Music Player outside routes - stays on all pages*/}
-          <MusicPlayer />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/yes" element={<YesPage />} />
-            {P.enableAboutYouPage && (
-              <Route path="/about-you" element={<AboutYouPage />} />
-            )}
-            {P.enableCreatorPage && (
-              <Route path="/creator" element={<CreatorPage />} />
-            )}
-          </Routes>
-        </PasswordGate>
-      </MaintenanceGate>
+      <PasswordGate>
+        {/* Music Player outside routes - stays on all pages*/}
+        <MusicPlayer />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/yes" element={<YesPage />} />
+          {P.enableAboutYouPage && (
+            <Route path="/about-you" element={<AboutYouPage />} />
+          )}
+          {P.enableCreatorPage && (
+            <Route path="/creator" element={<CreatorPage />} />
+          )}
+        </Routes>
+      </PasswordGate>
     </BrowserRouter>
   );
 }

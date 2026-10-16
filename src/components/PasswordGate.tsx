@@ -5,7 +5,7 @@ const UNLOCKED_KEY = "wyg_unlocked";
 
 function isUnlocked(): boolean {
   try {
-    return sessionStorage.getItem(UNLOCKED_KEY) === "true";
+    return localStorage.getItem(UNLOCKED_KEY) === "true";
   } catch {
     return false;
   }
@@ -13,7 +13,7 @@ function isUnlocked(): boolean {
 
 function setUnlocked() {
   try {
-    sessionStorage.setItem(UNLOCKED_KEY, "true");
+    localStorage.setItem(UNLOCKED_KEY, "true");
   } catch {
     /* ignore storage errors */
   }
