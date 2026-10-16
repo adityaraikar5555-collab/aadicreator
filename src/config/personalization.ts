@@ -26,7 +26,7 @@ export interface PersonalizationConfig {
   creatorRole: string;
   /** Public path to the creator photo (e.g. "/creator/aditya-raikar.jpg"). */
   creatorPhoto: string | null;
-  /** Public path to the recipient's photo (e.g. "/recipient/sneha.jpg"). */
+  /** Public path to the recipient's photo (e.g. "/recipient/my-love.png"). */
   recipientPhoto: string | null;
 
   /**
@@ -117,9 +117,9 @@ export interface PersonalizationConfig {
 export const PERSONALIZATION: PersonalizationConfig = {
   creatorName: "Aadi",
   creatorFullName: "Aditya Raikar",
-  creatorRole: "The person who made this little world for you, Sneha Kolvekar ✨",
+  creatorRole: "The person who made this little world for you, my special person ✨",
   creatorPhoto: "/creator/aditya-raikar.jpg",
-  recipientPhoto: "/recipient/sneha-kolvekar.png",
+  recipientPhoto: "/recipient/my-love.png",
 
   appPassword: "Raikar@123",
   enablePasswordGate: true,
@@ -138,7 +138,7 @@ export const PERSONALIZATION: PersonalizationConfig = {
     "Because some people deserve their own little universe — and this one is all yours.",
   heroFooter: "Made especially for {recipientName} ♥",
 
-  envelopeHint: "— a letter for you, Sneha Kolvekar, tap to open —",
+  envelopeHint: "— a letter for you, my special person, tap to open —",
   envelopeTitle: "For You Alone",
   letterIntro:
     "There's something I've been meaning to tell you, {recipientName}...",

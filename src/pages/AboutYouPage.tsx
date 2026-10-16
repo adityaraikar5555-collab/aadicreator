@@ -441,7 +441,7 @@ export default function AboutYouPage() {
         }}
       >
         <img
-          src="/Lord/kanha.png"
+          src="/Lord/kri.png"
           alt=""
           style={{
             height: "85vh",

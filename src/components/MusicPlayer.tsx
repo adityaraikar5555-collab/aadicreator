@@ -43,11 +43,11 @@ declare global {
 }
 
 /*   Queue setup
-   "Inthandham" always opens. Rest of featured songs splice in after opener ends. */
+   "Radha Kaise Na Jale" always opens. Rest of featured songs splice in after opener ends. */
 const DEFAULT_SONG = {
-  id: "dOKQeqGNJwY",
-  title: "Inthandham",
-  artist: "S.P. Charan (Sita Ramam)",
+  id: "qNnvL0ztJhA",
+  title: "Radha Kaise Na Jale",
+  artist: "Asha Bhosle & Udit Narayan (Lagaan)",
 };
 const _opener = DEFAULT_SONG;
 const _restFeat = FEATURED_SONGS.filter((s) => s.id !== _opener.id);
@@ -796,7 +796,7 @@ export default function MusicPlayer() {
         >
           {/* Creative Krishna backdrop */}
           <img
-            src="/Lord/krishna.png"
+            src="/Lord/lov.png"
             alt=""
             style={{
               position: "fixed",
@@ -865,15 +865,18 @@ export default function MusicPlayer() {
               className="mp-pl"
               style={{
                 position: "fixed",
-                bottom: "80px",
+                bottom: "82px",
                 left: 0,
                 right: 0,
-                maxHeight: "45vh",
+                maxHeight: "min(58vh, 460px)",
                 overflowY: "auto",
-                zIndex: 1016,
+                WebkitOverflowScrolling: "touch",
+                zIndex: 1017,
                 background: "#120609",
                 borderTop: "1px solid rgba(200,151,58,0.2)",
-                boxShadow: "0 -4px 20px rgba(0,0,0,0.5)",
+                borderRadius: "16px 16px 0 0",
+                boxShadow: "0 -8px 30px rgba(0,0,0,0.65)",
+                paddingBottom: "0.5rem",
               }}
             >
               <PlaylistItems

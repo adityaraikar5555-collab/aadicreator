@@ -157,4 +157,79 @@ export const PLAYLIST_SONGS = [
     title: "Матушка",
     artist: "Татьяна Куртукова",
   },
+  {
+    id: "Ki41AKu0iHc",
+    title: "Pehla Nasha",
+    artist: "Udit Narayan & Sadhana Sargam (Jo Jeeta Wohi Sikandar)",
+  },
+  {
+    id: "mt9xg0mmt28",
+    title: "Tum Se Hi",
+    artist: "Mohit Chauhan (Jab We Met)",
+  },
+  {
+    id: "BddP6PYo2gs",
+    title: "Kesariya",
+    artist: "Arijit Singh (Brahmastra)",
+  },
+  {
+    id: "ZWn5zOJvNAA",
+    title: "Kabira",
+    artist: "Tochi Raina & Rekha Bhardwaj (Yeh Jawaani Hai Deewani)",
+  },
+  {
+    id: "fdubeMFwuGs",
+    title: "Ilahi",
+    artist: "Arijit Singh (Yeh Jawaani Hai Deewani)",
+  },
+  {
+    id: "6SGRn9OHtFY",
+    title: "Agar Tum Saath Ho",
+    artist: "Alka Yagnik & Arijit Singh (Tamasha)",
+  },
+  {
+    id: "-d9nvq3402M",
+    title: "Raabta",
+    artist: "Arijit Singh (Agent Vinod)",
+  },
+  {
+    id: "uuIl0_92Hj0",
+    title: "Muskurane",
+    artist: "Arijit Singh (Citylights)",
+  },
+  {
+    id: "cNV5hLSa9H8",
+    title: "Tujhe Dekha To",
+    artist: "Kumar Sanu & Lata Mangeshkar (DDLJ)",
+  },
+  {
+    id: "BgIpNU0EnDk",
+    title: "Apna Bana Le",
+    artist: "Arijit Singh (Bhediya)",
+  },
+  {
+    id: "RLzC55ai0eo",
+    title: "Heeriye",
+    artist: "Jasleen Royal ft. Arijit Singh",
+  },
+  {
+    id: "mQiiw7uRngk",
+    title: "Tera Ban Jaunga",
+    artist: "Akhil Sachdeva & Tulsi Kumar (Kabir Singh)",
+  },
+  {
+    id: "bzSTpdcs-EI",
+    title: "Channa Mereya",
+    artist: "Arijit Singh (Ae Dil Hai Mushkil)",
+  },
+  {
+    id: "gvyUuxdRdR4",
+    title: "Raataan Lambiyan",
+    artist: "Jubin Nautiyal & Asees Kaur (Shershaah)",
+  },
+  {
+    id: "GxldQ9eX2wo",
+    title: "Until I Found You",
+    artist: "Stephen Sanchez",
+  },
 ];

@@ -101,7 +101,7 @@ function HomePage() {
             }}
           />
           <img
-            src="/Lord/kanha.png"
+            src="/Lord/kri.png"
             alt=""
             style={{
               height: "min(380px, 68vw)",
