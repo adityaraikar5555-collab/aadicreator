@@ -117,7 +117,7 @@ export interface PersonalizationConfig {
 export const PERSONALIZATION: PersonalizationConfig = {
   creatorName: "Aadi",
   creatorFullName: "Aditya Raikar",
-  creatorRole: "The person who made this little world for you, my special person ✨",
+  creatorRole: "The person who made this little world for you, my one and only ✨",
   creatorPhoto: "/creator/aditya-raikar.jpg",
   recipientPhoto: "/recipient/my-love.png",
 
@@ -138,7 +138,7 @@ export const PERSONALIZATION: PersonalizationConfig = {
     "Because some people deserve their own little universe — and this one is all yours.",
   heroFooter: "Made especially for {recipientName} ♥",
 
-  envelopeHint: "— a letter for you, my special person, tap to open —",
+  envelopeHint: "— a letter for you, my one and only, tap to open —",
   envelopeTitle: "For You Alone",
   letterIntro:
     "There's something I've been meaning to tell you, {recipientName}...",

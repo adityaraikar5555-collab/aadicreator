@@ -619,7 +619,7 @@ const LoveBook = forwardRef<LoveBookHandle>(function LoveBook(_, ref) {
                       padding: "0 1.5rem",
                     }}
                   >
-                    A story written just for you, my special person 💖
+                    A story written just for you, my one and only 💖
                   </p>
                   <div
                     style={{
